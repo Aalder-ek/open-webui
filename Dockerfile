@@ -160,6 +160,9 @@ RUN pip3 install --no-cache-dir uv && \
     mkdir -p /app/backend/data && chown -R $UID:$GID /app/backend/data/ && \
     rm -rf /var/lib/apt/lists/*;
 
+# Ensure uvicorn is installed (required by start.sh; missing from this fork's requirements.txt)
+RUN pip3 install --no-cache-dir uvicorn
+
 # Install Ollama if requested
 RUN if [ "$USE_OLLAMA" = "true" ]; then \
     date +%s > /tmp/ollama_build_hash && \
